@@ -1,0 +1,30 @@
+<!-- templates/events.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Events for {{ display_date }}</h2>
+
+  <!-- Add a link to create a new event -->
+  <p><a href="{{ url_for('create_event') }}">Create New Event</a></p>
+
+  {% if events %}
+    <ul>
+        {% for event in events %}
+        <li>
+          <strong>{{ event['eventName'] }}</strong> - {{ event['dateEvent'] }}
+          <p>{{ event['eventDescription'] }}</p>
+          <form action="{{ url_for('edit_event', event_id=event['eventID']) }}" method="get" style="display: inline;">
+            <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+          </form>
+          <!-- Add a delete button -->
+          <form action="{{ url_for('delete_event', event_id=event['eventID']) }}" method="post" style="display: inline;">
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No events for this day.</p>
+  {% endif %}
+{% endblock %}

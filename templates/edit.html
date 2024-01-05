@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Edit Event</h2>
+  <form method="post" action="{{ url_for('edit_event', event_id=event.eventID) }}">
+    <label for="eventName">Event Name:</label>
+    <input type="text" id="eventName" name="eventName" value="{{ event.eventName }}" required><br>
+
+    <label for="dateEvent">Event Date:</label>
+    <input type="date" id="dateEvent" name="dateEvent" value="{{ event.dateEvent }}" required><br>
+
+    <label for="eventDescription">Event Description:</label>
+    <textarea id="eventDescription" name="eventDescription" required>{{ event.eventDescription }}</textarea><br>
+
+    <button type="submit">Save Changes</button>
+  </form>
+{% endblock %}
